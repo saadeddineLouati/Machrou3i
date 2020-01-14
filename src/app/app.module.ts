@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
+import { AutosizeModule } from 'ngx-autosize'
 
 
 export function jwtOptionsFactory(storage) {
@@ -39,7 +40,8 @@ export function jwtOptionsFactory(storage) {
         useFactory: jwtOptionsFactory,
         deps: [Storage],
       }
-    })
+    }),
+    AutosizeModule
   ],
   providers: [
     StatusBar,

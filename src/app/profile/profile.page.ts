@@ -12,7 +12,11 @@ export class ProfilePage implements OnInit {
  
   data = '';
  
-  constructor(private authService: AuthService, private storage: Storage, private toastController: ToastController) { }
+  constructor(private authService: AuthService, private storage: Storage, private toastController: ToastController) {
+    this.authService.getSpecialData().subscribe(res => {
+      this.data = res['msg'];
+    });
+   }
  
   ngOnInit() {
   }

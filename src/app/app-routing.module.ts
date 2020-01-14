@@ -5,7 +5,8 @@ import { AuthGuardService } from './services/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'login',
@@ -22,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'chat',
-    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
+    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'projects',
@@ -30,15 +32,19 @@ const routes: Routes = [
   },
   {
     path: 'notifications',
-    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule),
+    canActivate: [AuthGuardService]
+
   },
   {
     path: 'research',
-    loadChildren: () => import('./research/research.module').then( m => m.ResearchPageModule)
+    loadChildren: () => import('./research/research.module').then( m => m.ResearchPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate: [AuthGuardService]
   }
 ];
 @NgModule({
