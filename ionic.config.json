@@ -1,5 +1,7 @@
 {
   "name": "machrou3i",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
