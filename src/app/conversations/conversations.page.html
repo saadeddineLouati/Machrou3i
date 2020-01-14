@@ -1,0 +1,26 @@
+<ion-app>
+  <ion-header translucent>
+    <ion-toolbar>
+      <ion-title>Conversations</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content fullscreen>
+    <ion-list>
+      <ion-list-header>
+        <ion-button color="primary"><ion-icon name="create"></ion-icon> New</ion-button>
+      </ion-list-header>
+
+      <ion-item *ngFor="let c of conversations" color="light">
+        <ion-avatar slot="start">
+          <img src="https://positiveattitudee.com/wp-content/uploads/2019/05/mr.-bean.jpg">
+        </ion-avatar>
+        <ion-label>
+          <h2> {{c.owner.email}} </h2>
+          <h3>{{c.createdAt | date: 'short'}}</h3>
+          <p> {{c.message}} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-app>

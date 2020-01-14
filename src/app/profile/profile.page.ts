@@ -10,22 +10,22 @@ import { ToastController } from '@ionic/angular';
 })
 export class ProfilePage implements OnInit {
  
-  data = '';
+  data = {};
  
   constructor(private authService: AuthService, private storage: Storage, private toastController: ToastController) {
     this.authService.getSpecialData().subscribe(res => {
-      this.data = res['msg'];
+      this.data = res;
     });
    }
  
   ngOnInit() {
   }
  
-  loadSpecialInfo() {
-    this.authService.getSpecialData().subscribe(res => {
-      this.data = res['msg'];
-    });
-  }
+  // loadSpecialInfo() {
+  //   this.authService.getSpecialData().subscribe(res => {
+  //     this.data = res['msg'];
+  //   });
+  // }
  
   logout() {
     this.authService.logout();

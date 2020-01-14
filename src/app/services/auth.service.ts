@@ -83,6 +83,32 @@ export class AuthService {
       })
     )
   }
+
+  getProjects() {
+    return this.http.get(`${this.url}/projects`).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(e);
+      })
+    )
+  }
+
+  getConversations() {
+    return this.http.get(`${this.url}/conversations`).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(e);
+      })
+    )
+  }
  
   isAuthenticated() {
     return this.authenticationState.value;

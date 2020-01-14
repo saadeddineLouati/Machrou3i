@@ -45,7 +45,11 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
     canActivate: [AuthGuardService]
+  },  {
+    path: 'conversations',
+    loadChildren: () => import('./conversations/conversations.module').then( m => m.ConversationsPageModule)
   }
+
 ];
 @NgModule({
   imports: [

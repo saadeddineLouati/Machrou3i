@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Login</ion-title>
   </ion-toolbar>
@@ -18,7 +18,107 @@
     </ion-item>
  
     <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button>
-    <ion-button expand="full" type="button" (click)="register()" [disabled]="!credentialsForm.valid">Register</ion-button>
+    <ion-button expand="full" type="button" href="/projects" >Register</ion-button>
  
   </form>
-</ion-content>
+  
+</ion-content> -->
+
+<ion-app>
+  <ion-header translucent>
+    <ion-toolbar color="primary" text-center>
+      <ion-title>Welcome to MACHROU3I</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content fullscreen padding scroll-y="false">
+    <ion-slides>
+
+      <ion-slide>
+        <img src="https://www.riyeda.tn/wp-content/uploads/2019/12/MACHROU3I-300x300.png"/>
+        <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()">
+ 
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+       
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+       
+          <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button>
+          <ion-button expand="full" type="button" href="/projects" >Register</ion-button>
+       
+        </form>
+        <p>
+          <b>Sign in </b>
+          or swipe to find the sign up
+        </p>
+        <ion-icon name="arrow-forward"></ion-icon>
+          </ion-slide>
+
+      <ion-slide>
+        <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()">
+ 
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+       
+          <ion-item>
+            <ion-label position="floating">Username</ion-label>
+            <ion-input type="text" formControlName="username"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Account type</ion-label>
+            <ion-select>
+              <ion-select-option value="cto">CTO (Chief technical officer)</ion-select-option>
+              <ion-select-option value="developer">Dveloper</ion-select-option>
+              <ion-select-option value="customer" selected>Customer</ion-select-option>
+            </ion-select>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label position="floating">Gender</ion-label>
+            <ion-select>
+              <ion-select-option value="female">Female</ion-select-option>
+              <ion-select-option value="male" selected>Male</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Phone</ion-label>
+            <ion-input type="text" formControlName="phone"></ion-input>
+          </ion-item>
+
+
+          <ion-item>
+            <ion-label position="floating">Company</ion-label>
+            <ion-input type="text" formControlName="company"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label position="floating">Confirm password</ion-label>
+            <ion-input type="password" formControlName="cpassword"></ion-input>
+          </ion-item>
+          <!-- <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button> -->
+          <!-- <ion-button expand="full" type="button" href="/projects" >Register</ion-button> -->
+          <ion-button shape="round" fill="outline">Outline + Round</ion-button>
+       
+        </form>
+        <p>
+          <b>Sign up </b>
+          or swipe to find the sign in
+        </p>
+        <ion-icon name="arrow-back"></ion-icon>      </ion-slide>
+    </ion-slides>
+  </ion-content>
+</ion-app>

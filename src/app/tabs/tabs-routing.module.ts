@@ -4,31 +4,30 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: 'menu',
     component: TabsPage,
     children: [
       {
-        path: 'tab1', children: [{path: '', loadChildren: () =>import('../home/home.module').then(m => m.HomePageModule)}]
+        path: 'home', children: [{path: '', loadChildren: () =>import('../home/home.module').then(m => m.HomePageModule)}]
       },
       {
-        path: 'tab2', children: [{path: '', loadChildren: () =>import('../notifications/notifications.module').then(m => m.NotificationsPageModule)}]
+        path: 'notifications', children: [{path: '', loadChildren: () =>import('../notifications/notifications.module').then(m => m.NotificationsPageModule)}]
       },
       {
-        path: 'tab3', children: [{path: '', loadChildren: () =>import('../research/research.module').then(m => m.ResearchPageModule)}]
+        path: 'research', children: [{path: '', loadChildren: () =>import('../research/research.module').then(m => m.ResearchPageModule)}]
       },
       {
-        path: 'tab4', loadChildren: () => import('../chat/chat.module').then( m => m.ChatPageModule)},
+        path: 'conversations', loadChildren: () => import('../conversations/conversations.module').then( m => m.ConversationsPageModule)},
       {
-        path: 'tab5',
-        loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)
+        path: 'profile', loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)
       },
       {
-        path: '', redirectTo: '/tabs/tab1', pathMatch: 'full'
+        path: '', redirectTo: '/menu/home', pathMatch: 'full'
       }
     ]
   },
   {
-    path: '', redirectTo: '/tabs/tab1', pathMatch: 'full'
+    path: '', redirectTo: '/menu/home', pathMatch: 'full'
   }
 ];
 
