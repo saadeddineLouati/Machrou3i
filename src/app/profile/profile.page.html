@@ -1,16 +1,64 @@
-<ion-header>
+<ion-header translucent no-border>
   <ion-toolbar>
-    <ion-title>Profile</ion-title>
+    <ion-title>&nbsp;</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out" color="danger" ></ion-icon>
+      </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
- 
-<ion-grid>
-  <ion-row class="ion-align-items-center">
-    <ion-col>
-      <p>{{ data.email }}</p>
-    </ion-col>
-  </ion-row>
-  </ion-grid>
 
-  <ion-button expand="full" (click)="logout()"><ion-icon name="log-out"></ion-icon> Logout</ion-button>
-  <!-- <ion-button expand="full" (click)="clearToken()">Clear JWT</ion-button> -->
+<ion-content fullscreen="true" slot="fixed">
+  <div class="card">
+    <div class="header">
+      <div class="avatar">
+        <img src="../../assets/{{data.picture}}" alt="">
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="user-meta ion-text-center">
+        <h3 class="playername">{{data.username}}</h3>
+        <h5 class="country">{{data.position}}</h5>
+        <h6 class="ranking">Phone: <ion-chip>
+            <ion-label>{{data.phone}}</ion-label>
+          </ion-chip>
+        </h6>
+      </div>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-card color="light">
+              <img src="https://banner2.cleanpng.com/20180411/hdw/kisspng-microsoft-project-computer-icons-computer-software-microsoft-5acd916ac511e6.3771418515234215468072.jpg" />
+              <ion-card-header>
+                <ion-card-subtitle>
+                  <ion-badge color="primary">Projects</ion-badge>
+                  </ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          <ion-col size="4">
+            <ion-card color="light">
+              <img src="https://i7.pngguru.com/preview/893/48/20/task-project-management-computer-icons-service-others.jpg" />
+              <ion-card-header>
+                <ion-card-subtitle>
+                  <ion-badge color="danger">Tasks</ion-badge>
+                  </ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col> 
+          <ion-col size="4">
+            <ion-card color="light">
+              <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/29d35920066343.562e4f035afc9.png" />
+              <ion-card-header>
+                <ion-card-subtitle>
+                  <ion-badge color="tertiary"> <small><small>{{data.createdAt | date: 'short'}}</small></small> </ion-badge>
+                  </ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>      
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

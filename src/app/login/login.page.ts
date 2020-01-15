@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../app/services/auth.service'
+import { AlertController } from '@ionic/angular';
  
 @Component({
   selector: 'app-login',
@@ -10,10 +11,21 @@ import { AuthService } from '../../app/services/auth.service'
 export class LoginPage implements OnInit {
  
   credentialsForm: FormGroup;
+  credentialsForm2: FormGroup;
  
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private alertController: AlertController) { }
  
   ngOnInit() {
+    this.credentialsForm2 = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      username:['',Validators.required],
+      position:['',Validators.required],
+      gender:['', Validators.required],
+      phone:['', Validators.required],
+      company:['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      cpassword: ['', [Validators.required, Validators.minLength(6)]]
+    });
     this.credentialsForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -25,10 +37,21 @@ export class LoginPage implements OnInit {
   }
  
   register() {
-    this.authService.register(this.credentialsForm.value).subscribe(res => {
-      // Call Login to automatically login the new user
-      this.authService.login(this.credentialsForm.value).subscribe();
+    this.authService.register(this.credentialsForm2.value).subscribe(async res => {
+      await this.showAlert('Validating ...');
+      await this.authService.login({email: this.credentialsForm2.value.email, password: this.credentialsForm2.value.password}).subscribe();
+
     });
   }
  
+  showAlert(msg) {
+   setTimeout(() => {
+    let alert = this.alertController.create({
+      message: msg,
+      header: 'Error',
+      buttons: ['OK']
+    });
+    alert.then(alert => alert.present());
+   }, 3000);
+  }
 }

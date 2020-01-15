@@ -5,32 +5,33 @@
     </ion-toolbar>
   </ion-header>,
   <ion-content fullscreen>
+    <ion-toolbar>
+      <ion-title>My projects</ion-title>
+    </ion-toolbar>
     <ion-grid>
       <ion-row class="ion-align-items-center">
-        <ion-col size="1"></ion-col>
-        <ion-col size="10">
-          <ion-card *ngFor="let p of projects">
+        <ion-col size="6" *ngFor="let p of projects">
+          <ion-card color="light">
             <img src="https://cdn2.iconfinder.com/data/icons/startup-management/325/Project_management_Project_Descriptions-512.png" />
             <ion-card-header>
               <ion-card-subtitle>
                 <ion-badge color="danger">{{p.size}} Project</ion-badge>
                 <ion-badge color="primary">{{p.status}}</ion-badge>
                 </ion-card-subtitle>
-              <ion-card-title> {{p.title}} </ion-card-title>
+              <ion-card-title style="margin: 0; display: block; overflow: hidden; -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; font-size: inherit; text-overflow: ellipsis; white-space: nowrap;"> {{p.title}} </ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              {{p.description}}
+
             </ion-card-content>
           </ion-card>
-        </ion-col>
-        <ion-col size="1"></ion-col>
+        </ion-col>       
       </ion-row>
     </ion-grid>
   </ion-content>
 </ion-app>
 
 <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-  <ion-fab-button color="primary">
+  <ion-fab-button color="primary" href="menu/profile">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

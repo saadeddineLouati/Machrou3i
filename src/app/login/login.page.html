@@ -60,7 +60,7 @@
           </ion-slide>
 
       <ion-slide>
-        <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="credentialsForm2" (ngSubmit)="register()">
  
           <ion-item>
             <ion-label position="floating">Email</ion-label>
@@ -74,16 +74,16 @@
 
           <ion-item>
             <ion-label position="floating">Account type</ion-label>
-            <ion-select>
+            <ion-select formControlName="position">
               <ion-select-option value="cto">CTO (Chief technical officer)</ion-select-option>
               <ion-select-option value="developer">Dveloper</ion-select-option>
               <ion-select-option value="customer" selected>Customer</ion-select-option>
             </ion-select>
-          </ion-item>
+          </ion-item >
           
           <ion-item>
             <ion-label position="floating">Gender</ion-label>
-            <ion-select>
+            <ion-select formControlName="gender">
               <ion-select-option value="female">Female</ion-select-option>
               <ion-select-option value="male" selected>Male</ion-select-option>
             </ion-select>
@@ -111,7 +111,8 @@
           </ion-item>
           <!-- <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button> -->
           <!-- <ion-button expand="full" type="button" href="/projects" >Register</ion-button> -->
-          <ion-button shape="round" fill="outline">Outline + Round</ion-button>
+          <ion-button shape="round" fill="outline" type="submit" [disabled]="!credentialsForm.valid">Register</ion-button>
+
        
         </form>
         <p>

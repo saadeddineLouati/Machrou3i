@@ -45,7 +45,7 @@ export class AuthService {
     return this.http.post(`${this.url}/users/register`, credentials).pipe(
       catchError(e => {
         this.showAlert(e.error.msg);
-        throw new Error(e);
+        throw new Error(JSON.stringify(e));
       })
     );
   }
@@ -60,7 +60,7 @@ export class AuthService {
         }),
         catchError(e => {
           this.showAlert(e.error.msg);
-          throw new Error(e);
+          throw new Error(JSON.stringify(e));
         })
       );
   }
@@ -79,7 +79,7 @@ export class AuthService {
           this.showAlert('You are not authorized for this!');
           this.logout();
         }
-        throw new Error(e);
+        throw new Error(JSON.stringify(e));
       })
     )
   }
