@@ -11,7 +11,7 @@
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col size="6" *ngFor="let p of projects">
-          <ion-card color="light">
+          <ion-card color="light" (click)="projetDetail(p)">
             <img src="https://cdn2.iconfinder.com/data/icons/startup-management/325/Project_management_Project_Descriptions-512.png" />
             <ion-card-header>
               <ion-card-subtitle>
@@ -31,7 +31,7 @@
 </ion-app>
 
 <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-  <ion-fab-button color="primary" href="menu/profile">
+  <ion-fab-button color="primary" (click)="addNewProject()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

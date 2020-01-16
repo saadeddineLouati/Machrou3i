@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'addproject',
     loadChildren: () => import('./addproject/addproject.module').then( m => m.AddprojectPageModule)
+  },
+  {
+    path: 'projectdetail',
+    loadChildren: () => import('./projectdetail/projectdetail.module').then( m => m.ProjectdetailPageModule)
   }
 ];
 

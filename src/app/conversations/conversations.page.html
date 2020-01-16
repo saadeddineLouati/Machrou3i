@@ -8,7 +8,7 @@
   <ion-content fullscreen>
     <ion-list>
       <ion-list-header>
-        <ion-button color="primary"><ion-icon name="create"></ion-icon> New</ion-button>
+        <ion-button color="primary" (click)="newChat()"><ion-icon name="create"></ion-icon> New</ion-button>
       </ion-list-header>
 
       <ion-item *ngFor="let c of conversations" color="light">

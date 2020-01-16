@@ -16,6 +16,7 @@ export class AuthService {
  
   url = environment.url;
   user = null;
+  userdata = null;
   authenticationState = new BehaviorSubject(false);
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
@@ -56,7 +57,9 @@ export class AuthService {
         tap(res => {
           this.storage.set(TOKEN_KEY, res['token']);
           this.user = this.helper.decodeToken(res['token']);
+          this.userdata=this.http.post(`${this.url}/users/login`, credentials);
           this.authenticationState.next(true);
+
         }),
         catchError(e => {
           this.showAlert(e.error.msg);

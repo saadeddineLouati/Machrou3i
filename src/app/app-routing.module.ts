@@ -43,9 +43,21 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'addproject',
+        loadChildren: () => import('./home/addproject/addproject.module').then( m => m.AddprojectPageModule),
+        canActivate: [AuthGuardService]
+      }
+    ],
     canActivate: [AuthGuardService]
-  },  {
+  },
+  {
     path: 'conversations',
     loadChildren: () => import('./conversations/conversations.module').then( m => m.ConversationsPageModule)
   }
