@@ -8,5 +8,43 @@
 </ion-header>
 
 <ion-content>
+  <form (ngSubmit)="addProject()" [formGroup]="addProjectForm">
+    <ion-item>
+      <ion-label position="floating">Title</ion-label>
+      <ion-input type="text" formControlName="title"></ion-input>
+    </ion-item>
+ 
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-input type="text" formControlName="description"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="floating">Size</ion-label>
+      <ion-select formControlName="size">
+        <ion-select-option value="big">Big (More than 100 Contributer)</ion-select-option>
+        <ion-select-option value="medium">Medium (Between 50 and 100 Contributer)</ion-select-option>
+        <ion-select-option value="small" selected>Small (Less than 50 Contributer)</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="floating">Kind</ion-label>
+      <ion-select formControlName="kind">
+        <ion-select-option value="manufacturing ">Manufacturing </ion-select-option>
+        <ion-select-option value="construction ">Construction </ion-select-option>
+        <ion-select-option value="research">Research </ion-select-option>
+        <ion-select-option value="management" selected>Management </ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item >
+      <ion-label position="floating">Deadline</ion-label>
+      <ion-input type="date" formControlName="deadline" autofocus="true"></ion-input>
+    </ion-item>
 
+    <ion-button expand="block" shape="round" fill="outline" type="submit" size="default"  [disabled]="!addProjectForm.valid">Create</ion-button>
+
+ 
+  </form>
 </ion-content>

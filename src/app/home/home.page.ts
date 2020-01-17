@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
+import { TaskgroupService } from '../services/taskgroup.service';
 
 
 @Component({
@@ -12,9 +13,13 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit {
   projects ;
-  constructor(private authService: AuthService, private storage: Storage, private toastController: ToastController, private router: Router) { 
+  getTaskgroups;
+  constructor(private authService: AuthService, private storage: Storage, private toastController: ToastController, private router: Router, private taskgroup: TaskgroupService) { 
     this.authService.getProjects().subscribe(res => {
       this.projects = res;
+    });
+    this.taskgroup.getTaskgroups().subscribe(res => {
+      this.getTaskgroups = res;
     });
   }
 
@@ -25,6 +30,6 @@ export class HomePage implements OnInit {
     this.router.navigate(['home/addproject']);
   }
   projetDetail(p){
-    this.router.navigate(['home/projectdetail', p]);
+    this.router.navigate(['menu/projectdetail', p]);
   }
 }

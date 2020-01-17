@@ -1,14 +1,16 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentActionSheet()">
+        <ion-icon name="more"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>{{project.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
+<ion-content color="light">
+  <ion-card color="primary">
     <img src="../../../assets/bridge.png" />
     <ion-card-header>
       <ion-card-subtitle><ion-icon name="alarm"></ion-icon>Since {{project.createdAt |date: 'short' }}</ion-card-subtitle>
@@ -20,43 +22,23 @@
   </ion-card>
   <ion-grid>
     <ion-row>
-      <h4>Task groups</h4>
+      <h4>Cards</h4>
     </ion-row>
     <ion-row>
-      <ion-col size="4">
-        <ion-card>
+      <ion-col size="4" *ngFor="let t of taskgroups">
+        <ion-card color="light" (click)="carDetails(t)">
           <img src="../../../assets/bridge.png" />
           <ion-card-header>
-            <ion-card-subtitle><ion-icon name="alarm"></ion-icon>Since {{project.createdAt |date: 'short' }}</ion-card-subtitle>
-            <ion-card-title>{{project.title}}</ion-card-title>
+            <ion-card-subtitle class="ion-text-center">{{ t.title }}</ion-card-subtitle>
           </ion-card-header>
-          <ion-card-content>
-            {{project.description}}
-          </ion-card-content>
         </ion-card>
       </ion-col>
       <ion-col size="4">
-        <ion-card>
-          <img src="../../../assets/bridge.png" />
+        <ion-card color="secondary" (click)="addCard()">
+          <img src="../../../assets/plus.png"  />
           <ion-card-header>
-            <ion-card-subtitle><ion-icon name="alarm"></ion-icon>Since {{project.createdAt |date: 'short' }}</ion-card-subtitle>
-            <ion-card-title>{{project.title}}</ion-card-title>
+            <ion-card-subtitle class="ion-text-center"> New Card</ion-card-subtitle>
           </ion-card-header>
-          <ion-card-content>
-            {{project.description}}
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="4">
-        <ion-card>
-          <img src="../../../assets/bridge.png" />
-          <ion-card-header>
-            <ion-card-subtitle><ion-icon name="alarm"></ion-icon>Since {{project.createdAt |date: 'short' }}</ion-card-subtitle>
-            <ion-card-title>{{project.title}}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            {{project.description}}
-          </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>

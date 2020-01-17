@@ -38,20 +38,17 @@ export class LoginPage implements OnInit {
  
   register() {
     this.authService.register(this.credentialsForm2.value).subscribe(async res => {
-      await this.showAlert('Validating ...');
       await this.authService.login({email: this.credentialsForm2.value.email, password: this.credentialsForm2.value.password}).subscribe();
 
     });
   }
  
   showAlert(msg) {
-   setTimeout(() => {
     let alert = this.alertController.create({
       message: msg,
       header: 'Error',
       buttons: ['OK']
     });
     alert.then(alert => alert.present());
-   }, 3000);
   }
 }

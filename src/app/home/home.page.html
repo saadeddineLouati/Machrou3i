@@ -1,22 +1,19 @@
 <ion-app>
   <ion-header translucent>
-    <ion-toolbar>
-      <ion-title>Home</ion-title>
-    </ion-toolbar>
-  </ion-header>,
-  <ion-content fullscreen>
-    <ion-toolbar>
+    <ion-toolbar color="tertiary">
       <ion-title>My projects</ion-title>
     </ion-toolbar>
+  </ion-header>,
+  <ion-content  class="getstart" fullscreen color="light">
+
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col size="6" *ngFor="let p of projects">
           <ion-card color="light" (click)="projetDetail(p)">
-            <img src="https://cdn2.iconfinder.com/data/icons/startup-management/325/Project_management_Project_Descriptions-512.png" />
+            <img src="../../assets/projects.jpg" />
             <ion-card-header>
               <ion-card-subtitle>
-                <ion-badge color="danger">{{p.size}} Project</ion-badge>
-                <ion-badge color="primary">{{p.status}}</ion-badge>
+                <ion-badge color="danger">{{p.status}}</ion-badge>
                 </ion-card-subtitle>
               <ion-card-title style="margin: 0; display: block; overflow: hidden; -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; font-size: inherit; text-overflow: ellipsis; white-space: nowrap;"> {{p.title}} </ion-card-title>
             </ion-card-header>

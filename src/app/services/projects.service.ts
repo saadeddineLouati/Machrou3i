@@ -5,12 +5,43 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Storage } from '@ionic/storage';
 import { environment } from '../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectsService {
+  url = environment.url;
+  user = null;
+  userdata = null;
+  constructor(private http: HttpClient, private alertController: AlertController) { }
+  showAlert(msg) {
+    let alert = this.alertController.create({
+      message: msg,
+      header: 'Error',
+      buttons: ['OK']
+    });
+    alert.then(alert => alert.present());
+  }
 
-  constructor() { }
+  getProjects() {
+    return this.http.get(`${this.url}/projects`).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+        }
+        throw new Error(e);
+      })
+    )
+  }
+
+  addProject(credentials) {
+    return this.http.post(`${this.url}/projects/addproject`, credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
 }

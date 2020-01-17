@@ -22,6 +22,19 @@ const routes: Routes = [
         path: 'profile', loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)
       },
       {
+        path: 'projectdetail',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../home/projectdetail/projectdetail.module').then( m => m.ProjectdetailPageModule)
+          },
+          {
+            path: 'addcard',
+            loadChildren: () => import('../home/projectdetail/add-card/add-card.module').then( m => m.AddCardPageModule)
+          }
+        ]
+      },
+      {
         path: '', redirectTo: '/menu/home', pathMatch: 'full'
       }
     ]

@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentActionSheet()">
+        <ion-icon name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{card.title}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-col size="4" *ngFor="let t of tasks">
+    <ion-card color="light" (click)="carDetails(t)">
+      <ion-card-header>
+        <ion-card-subtitle class="ion-text-center">{{ t.title }}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </ion-col> -->
+
+  <ion-list>
+    <ion-list-header>
+      Tasks List
+    </ion-list-header>
+    <ion-card color="light">
+      <!-- <ion-badge color="primary" style="margin-right: 20px;" text-right (press)="pressEvent($event)">New {{press}}</ion-badge> -->
+      <ion-header>
+        <ion-toolbar color="medium">
+          <ion-buttons slot="end">
+            <ion-button (click)="presentActionSheet()">
+              <ion-icon name="more"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>
+            <ion-badge color="danger">{{calculateDif(card)}} Hour</ion-badge>
+            {{card.title}}
+          </ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-item color="light">
+        <ion-avatar slot="start" style="margin-right: -10px;">
+          <img src="../../../../assets/male.png" style="border: 2px solid white;">
+        </ion-avatar>
+        <ion-avatar slot="start" style="margin-right: -10px;">
+          <img src="../../../../assets/male.png" style="border: 2px solid white;">
+        </ion-avatar>
+        <ion-label style="margin-left: 10px;">
+          <h3>Task title</h3>
+          <p>Here you find the task description with more details.</p>
+        </ion-label>
+        <ion-label>
+          <ion-progress-bar value="0"></ion-progress-bar>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-content>

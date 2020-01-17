@@ -19,9 +19,9 @@
     <div class="card-body">
       <div class="user-meta ion-text-center">
         <h3 class="playername">{{data.username}}</h3>
-        <h5 class="country">{{data.position}}</h5>
-        <h6 class="ranking">Phone: <ion-chip>
-            <ion-label>{{data.phone}}</ion-label>
+        <h5 class="country">{{data.email}}</h5>
+        <h6 class="ranking">Position: <ion-chip>
+            <ion-label  text-uppercase>{{data.position}}</ion-label>
           </ion-chip>
         </h6>
       </div>
@@ -29,30 +29,30 @@
         <ion-row class="ion-align-items-center">
           <ion-col size="4">
             <ion-card color="light">
-              <img src="https://banner2.cleanpng.com/20180411/hdw/kisspng-microsoft-project-computer-icons-computer-software-microsoft-5acd916ac511e6.3771418515234215468072.jpg" />
+              <img src="../../assets/projects.jpg" />
               <ion-card-header>
                 <ion-card-subtitle>
-                  <ion-badge color="primary">Projects</ion-badge>
+                  <ion-badge color="primary" class="ion-text-center">Projects</ion-badge>
                   </ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
           <ion-col size="4">
             <ion-card color="light">
-              <img src="https://i7.pngguru.com/preview/893/48/20/task-project-management-computer-icons-service-others.jpg" />
+              <img src="../../assets/tasks.jpg" />
               <ion-card-header>
                 <ion-card-subtitle>
-                  <ion-badge color="danger">Tasks</ion-badge>
+                  <ion-badge color="danger" class="ion-text-center">Tasks</ion-badge>
                   </ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col> 
           <ion-col size="4">
             <ion-card color="light">
-              <img src="https://i.dlpng.com/static/png/1200358-time-png-hd-time-png-512_512_preview.png" />
+              <img src="../../assets/clock.png" />
               <ion-card-header>
                 <ion-card-subtitle>
-                  <ion-badge color="tertiary"> <small><small>{{data.createdAt | date: 'short'}}</small></small> </ion-badge>
+                  <ion-badge color="tertiary" class="ion-text-center"> <small><small>{{data.createdAt | date: 'short'}}</small></small> </ion-badge>
                   </ion-card-subtitle>
               </ion-card-header>
             </ion-card>
