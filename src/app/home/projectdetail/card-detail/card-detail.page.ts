@@ -22,9 +22,13 @@ export class CardDetailPage implements OnInit {
 
    calculateDif(event) {
     //  let diff = Math.abs(event.deadline - event.createdAt); return new Date(diff);
-    let difference = new Date().getTime() - new Date(event.deadline).getTime();
-    return Math.round(difference/3600000)
-   }
+    let difference = new Date(event.deadline).getTime() - new Date().getTime();
+    if(difference<0){
+      return 'Expired';
+    }else{
+      return (Math.round(difference/3600000)+' Hour');
+    }
+  }
 
    pressEvent(e) {
     this.press++
@@ -34,7 +38,6 @@ export class CardDetailPage implements OnInit {
     this.route.params.forEach((params: Params) => {
   		this.card = params;
     });
-    console.log(this.card);
   }
 
   goBack(){

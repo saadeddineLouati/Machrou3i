@@ -1,8 +1,12 @@
-:root {
-    background-color: yellow;
+ion-content{
+    --background: none;
+    background-image: url(../../assets/mauve.jfif);
 }
 
-getstart {
-    background-image: url('../../assets/background.jpg');
-    background-color: yellow;
+ion-card{
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    color: white;
+}
+ion-card-title{
+    color: white;
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: ProjectdetailPage
   },
   {
-    path: 'add-card',
+    path: 'add-card/:id',
     loadChildren: () => import('./add-card/add-card.module').then( m => m.AddCardPageModule)
   },
   {

@@ -29,7 +29,7 @@ const routes: Routes = [
             loadChildren: () => import('../home/projectdetail/projectdetail.module').then( m => m.ProjectdetailPageModule)
           },
           {
-            path: 'addcard',
+            path: 'addcard/:id',
             loadChildren: () => import('../home/projectdetail/add-card/add-card.module').then( m => m.AddCardPageModule)
           }
         ]

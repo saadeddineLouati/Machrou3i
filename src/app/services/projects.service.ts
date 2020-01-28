@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { environment } from '../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +38,16 @@ export class ProjectsService {
 
   addProject(credentials) {
     return this.http.post(`${this.url}/projects/addproject`, credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
+  deleteProject(credentials) {
+    console.log(credentials);
+    return this.http.post(`${this.url}/projects/removeproject`, credentials).pipe(
       catchError(e => {
         this.showAlert(e.error.msg);
         throw new Error(JSON.stringify(e));

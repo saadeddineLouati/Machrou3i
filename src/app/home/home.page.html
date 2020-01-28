@@ -1,27 +1,41 @@
 <ion-app>
-  <ion-header translucent>
+  <ion-header color="transparent">
     <ion-toolbar color="tertiary">
       <ion-title>My projects</ion-title>
     </ion-toolbar>
-  </ion-header>,
-  <ion-content  class="getstart" fullscreen color="light">
-
+  </ion-header>
+  <ion-content fullscreen>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
     <ion-grid>
-      <ion-row class="ion-align-items-center">
+      <ion-row>
         <ion-col size="6" *ngFor="let p of projects">
-          <ion-card color="light" (click)="projetDetail(p)">
-            <img src="../../assets/projects.jpg" />
-            <ion-card-header>
+          <ion-card>
+            <img src="../../assets/projects.jpg" (click)="projetDetail(p)" />
+            <ion-card-header (click)="projetDetail(p)">
               <ion-card-subtitle>
-                <ion-badge color="danger">{{p.status}}</ion-badge>
-                </ion-card-subtitle>
-              <ion-card-title style="margin: 0; display: block; overflow: hidden; -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; font-size: inherit; text-overflow: ellipsis; white-space: nowrap;"> {{p.title}} </ion-card-title>
+                <ion-badge color="primary"
+                  style="margin: 0; display: block; overflow: scroll; -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; font-size: inherit; white-space: nowrap;">
+                  {{p.status}}</ion-badge>
+              </ion-card-subtitle>
+              <ion-card-title
+                style="margin: 0; display: block; overflow: scroll; -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; font-size: inherit; white-space: nowrap;">
+                {{p.title}}
+              </ion-card-title>
             </ion-card-header>
-            <ion-card-content>
-
+            <ion-card-content class="ion-text-center">
+              <ion-badge color="warning" slot="end" (click)="onUpdateProject(p)">
+                <ion-icon name="create"></ion-icon>
+              </ion-badge>
+              <ion-badge color="danger" slot="end" (click)="onDeleteProject(p)">
+                <ion-icon name="close"></ion-icon>
+              </ion-badge>
             </ion-card-content>
           </ion-card>
-        </ion-col>       
+        </ion-col>
       </ion-row>
     </ion-grid>
   </ion-content>

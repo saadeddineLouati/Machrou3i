@@ -6,12 +6,12 @@
 }
 
 .other-message{
-    background-image: linear-gradient(#879af2, #fda000);
+    background-image: linear-gradient(#879af2, #879af2);
     color: #fff;
 }
 
 .my-message{
-    background-image: linear-gradient(#2999ad, #41e975);
+    background-image: linear-gradient(#41e975, #41e975);
     color: #fff;
 }
 
@@ -34,4 +34,18 @@
 .msg-btn{
     --padding-start: 0.5em; 
     --padding-end: 0.5em; 
+}
+
+ion-content{
+    --background: none;
+    background-image: url(../../assets/chat.jpg);
+}
+
+.footer{
+    --background: none;
+    background-image: url(../../assets/chat.jpg);
+}
+
+textarea{
+    outline: none;
 }

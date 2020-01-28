@@ -1,5 +1,7 @@
 ion-content {
     --background: url(../../assets/background.jpg) no-repeat top center/cover fixed, #fff;
+    background-repeat: no-repeat;
+    background-size:cover;
     position: relative;
     height: 100%;
     width: 100%;

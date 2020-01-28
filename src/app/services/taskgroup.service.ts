@@ -45,4 +45,14 @@ export class TaskgroupService {
     });
   }
 
+  deleteTaskGroup(credentials) {
+    console.log(credentials);
+    return this.http.post(`${this.url}/tasksgroups/removetaskgroup`, credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
 }

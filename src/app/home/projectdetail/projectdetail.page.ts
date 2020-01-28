@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Params,Router, ActivatedRoute } from '@angular/router';
 import { TaskgroupService } from 'src/app/services/taskgroup.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-projectdetail',
@@ -12,16 +12,22 @@ import { ActionSheetController } from '@ionic/angular';
 export class ProjectdetailPage implements OnInit {
   project;
   taskgroups;
-  constructor(public actionSheetController: ActionSheetController, private authService: AuthService,private router: Router,  private route:ActivatedRoute, private taskgroup: TaskgroupService) {
-    this.taskgroup.getTaskgroups().subscribe(res => {
-      this.taskgroups = res;
-    });
+  constructor(private alertController: AlertController, private taskgroupService:TaskgroupService, public actionSheetController: ActionSheetController, private authService: AuthService,private router: Router,  private route:ActivatedRoute, private taskgroup: TaskgroupService) {
+    
    }
 
   ngOnInit() {
+    this.getProject();
+  }
+
+  getProject(){
     this.route.params.forEach((params: Params) => {
   		this.project = params;
-  	});
+    });
+    
+    this.taskgroup.getTaskgroups().subscribe(res => {
+      this.taskgroups = res;
+    });
   }
 
   async presentActionSheet() {
@@ -61,12 +67,44 @@ export class ProjectdetailPage implements OnInit {
     await actionSheet.present();
   }
   
-  
+  async onDeleteCard(taskGroup){
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Do you really want to delete <strong>' + taskGroup.title + '</strong> ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: async () => {
+            await this.taskgroupService.deleteTaskGroup(taskGroup).subscribe(async res => {
+              this.getProject();
+              // this.router.navigate(['/']);
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  onUpdateCard(){
+    console.log('update');
+  }
+
   carDetails(t){
     this.router.navigate(['menu/projectdetail/card-detail', t])
   }
 
   addCard(t){
-    this.router.navigate(['menu/projectdetail/addcard'])
+    this.router.navigate(['menu/projectdetail/addcard/'+this.project._id])
   }
+
+  
 }

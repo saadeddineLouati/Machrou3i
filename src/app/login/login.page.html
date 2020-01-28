@@ -26,7 +26,7 @@
 
 <ion-app>
   <ion-header translucent>
-    <ion-toolbar color="primary" text-center>
+    <ion-toolbar color="transparent" text-center>
       <ion-title>Welcome to MACHROU3I</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -38,12 +38,12 @@
         <img src="https://www.riyeda.tn/wp-content/uploads/2019/12/MACHROU3I-300x300.png"/>
         <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()">
  
-          <ion-item>
+          <ion-item color="transparent">
             <ion-label position="floating">Email</ion-label>
             <ion-input type="email" formControlName="email"></ion-input>
           </ion-item>
        
-          <ion-item>
+          <ion-item color="transparent">
             <ion-label position="floating">Password</ion-label>
             <ion-input type="password" formControlName="password"></ion-input>
           </ion-item>

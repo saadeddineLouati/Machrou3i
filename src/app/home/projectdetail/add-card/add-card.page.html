@@ -10,31 +10,31 @@
 <ion-content>
   <form (ngSubmit)="addProject()">
  
-    <ion-item>
+    <ion-item color="transparent">
       <ion-label position="floating">Title</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" formControlName="title"></ion-input>
     </ion-item>
  
-    <ion-item>
+    <ion-item color="transparent">
       <ion-label position="floating">Description</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" formControlName="description"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item color="transparent">
       <ion-label position="floating">Priority</ion-label>
-      <ion-select >
+      <ion-select formControlName="priority">
         <ion-select-option value="red">Red (Height)</ion-select-option>
         <ion-select-option value="orange">Orange (Medium)</ion-select-option>
         <ion-select-option value="green" selected>Green (Low)</ion-select-option>
       </ion-select>
     </ion-item >
 
-    <ion-item>
+    <ion-item color="transparent">
       <ion-label position="floating">Deadline</ion-label>
-      <ion-input type="date" autofocus="true"></ion-input>
+      <ion-input type="date" autofocus="true" formControlName="deadline"></ion-input>
     </ion-item>
 
-    <ion-button expand="block" shape="round" fill="outline" type="submit" size="default">Create</ion-button>
+    <ion-button expand="block" shape="round" fill="solid" type="submit" size="default">Create</ion-button>
 
  
   </form>

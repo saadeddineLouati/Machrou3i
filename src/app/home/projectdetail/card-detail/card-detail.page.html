@@ -25,7 +25,7 @@
     <ion-list-header>
       Tasks List
     </ion-list-header>
-    <ion-card color="light">
+    <ion-card *ngFor="let t of tasks">
       <!-- <ion-badge color="primary" style="margin-right: 20px;" text-right (press)="pressEvent($event)">New {{press}}</ion-badge> -->
       <ion-header>
         <ion-toolbar color="medium">
@@ -35,26 +35,28 @@
             </ion-button>
           </ion-buttons>
           <ion-title>
-            <ion-badge color="danger">{{calculateDif(card)}} Hour</ion-badge>
-            {{card.title}}
+            {{t.title}}
           </ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-item color="light">
-        <ion-avatar slot="start" style="margin-right: -10px;">
-          <img src="../../../../assets/male.png" style="border: 2px solid white;">
-        </ion-avatar>
-        <ion-avatar slot="start" style="margin-right: -10px;">
-          <img src="../../../../assets/male.png" style="border: 2px solid white;">
+        <ion-avatar slot="start" style="margin-right: -10px;" *ngIf="t.owner">
+          <img src="../../../../assets/{{t.owner.picture}}" style="border: 2px solid dodgerblue;">
         </ion-avatar>
         <ion-label style="margin-left: 10px;">
-          <h3>Task title</h3>
-          <p>Here you find the task description with more details.</p>
-        </ion-label>
-        <ion-label>
-          <ion-progress-bar value="0"></ion-progress-bar>
+          <h3 class="ion-text-capitalize">
+            <ion-badge color="primary" >{{t.owner.username}}</ion-badge>&nbsp;
+            <ion-badge color="success" >{{t.status}}</ion-badge>&nbsp;
+            <ion-badge color="danger"><small>{{calculateDif(t)}}</small></ion-badge>
+          </h3>
         </ion-label>
       </ion-item>
+      <ion-card-content class="contentstyle">
+        <p class="pstyle">{{t.description}}</p>
+      </ion-card-content>
+      <ion-progress-bar value="{{t.progress}}" *ngIf="t.priority=='red'" color="danger"></ion-progress-bar>
+      <ion-progress-bar value="{{t.progress}}" *ngIf="t.priority=='green'" color="success"></ion-progress-bar>
+      <ion-progress-bar value="{{t.progress}}" *ngIf="t.priority=='orange'" color="warning"></ion-progress-bar>
     </ion-card>
   </ion-list>
 </ion-content>
