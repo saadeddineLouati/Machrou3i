@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="menu/projectdetail/projectAfterSearch" (click)="back()"></ion-back-button>
     </ion-buttons>
     <ion-title>New card</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="addProject()">
+  <form (ngSubmit)="addTaskGroup($event)" [formGroup]="addCardForm">
  
     <ion-item color="transparent">
       <ion-label position="floating">Title</ion-label>
@@ -34,7 +34,7 @@
       <ion-input type="date" autofocus="true" formControlName="deadline"></ion-input>
     </ion-item>
 
-    <ion-button expand="block" shape="round" fill="solid" type="submit" size="default">Create</ion-button>
+    <ion-button expand="block" shape="round" fill="solid" type="submit" size="default" [disabled]="!addCardForm.valid">Create</ion-button>
 
  
   </form>

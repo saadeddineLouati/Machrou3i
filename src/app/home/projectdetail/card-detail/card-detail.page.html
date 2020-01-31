@@ -1,36 +1,76 @@
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
-      <ion-back-button (click)="goBack()"></ion-back-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="presentActionSheet()">
-        <ion-icon name="more"></ion-icon>
-      </ion-button>
+      <ion-back-button (click)="goBack()" defaultHref=""></ion-back-button>
+  
     </ion-buttons>
     <ion-title> {{card.title}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- <ion-col size="4" *ngFor="let t of tasks">
-    <ion-card color="light" (click)="carDetails(t)">
-      <ion-card-header>
-        <ion-card-subtitle class="ion-text-center">{{ t.title }}</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>
-  </ion-col> -->
 
   <ion-list>
     <ion-list-header>
       Tasks List
     </ion-list-header>
+
+    <form (ngSubmit)="newTask($event)" [formGroup]="addTask">
+
+      <ion-card>
+        <ion-header>
+          <ion-toolbar color="transparent">
+            <ion-item>
+              <ion-input type="text" placeholder="New task" class="input" autofocus="true" formControlName="title">
+              </ion-input>
+            </ion-item>
+          </ion-toolbar>
+        </ion-header>
+        <ion-item color="light" no-padding>
+          <ion-select placeholder="Developer" formControlName="owner" *ngFor="let d of developers">
+            <ion-label>Developer</ion-label>
+            <ion-select-option value="{{d._id}}">
+              {{d.username}}
+            </ion-select-option>
+          </ion-select>
+          <ion-select placeholder="Priority" formControlName="priority">
+            <ion-label>Priority</ion-label>
+            <ion-select-option value="red">Red (Height)</ion-select-option>
+            <ion-select-option value="orange">Orange (Medium)</ion-select-option>
+            <ion-select-option value="green" selected>Green (Low)</ion-select-option>
+          </ion-select>
+          <ion-input type="date" formControlName="deadline"></ion-input>
+        </ion-item>
+        <ion-card-content>
+          <ion-input formControlName="description" type="text" placeholder="Description" class="input"></ion-input>
+        </ion-card-content>
+        <ion-grid>
+          <ion-row align-items-right no-padding>
+            <ion-col>
+              <ion-button color="primary" size="small" [disabled]="!addTask.valid" type="submit">
+                <ion-icon name="add"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </form>
     <ion-card *ngFor="let t of tasks">
-      <!-- <ion-badge color="primary" style="margin-right: 20px;" text-right (press)="pressEvent($event)">New {{press}}</ion-badge> -->
       <ion-header>
-        <ion-toolbar color="medium">
-          <ion-buttons slot="end">
-            <ion-button (click)="presentActionSheet()">
+          <ion-toolbar color="danger" *ngIf="t.priority=='red'">
+            <ion-buttons slot="end">
+          <ion-button (click)="presentActionSheet(t)">
+            <ion-icon name="more"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>
+          {{t.title}}
+        </ion-title>
+      </ion-toolbar>
+          <ion-toolbar color="success" *ngIf="t.priority=='green'">
+
+            <ion-buttons slot="end">
+            <ion-button (click)="presentActionSheet(t)">
               <ion-icon name="more"></ion-icon>
             </ion-button>
           </ion-buttons>
@@ -38,6 +78,16 @@
             {{t.title}}
           </ion-title>
         </ion-toolbar>
+        <ion-toolbar color="warning" *ngIf="t.priority=='orange'">
+          <ion-buttons slot="end">
+        <ion-button (click)="presentActionSheet(t)">
+          <ion-icon name="more"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        {{t.title}}
+      </ion-title>
+    </ion-toolbar>
       </ion-header>
       <ion-item color="light">
         <ion-avatar slot="start" style="margin-right: -10px;" *ngIf="t.owner">
@@ -45,18 +95,13 @@
         </ion-avatar>
         <ion-label style="margin-left: 10px;">
           <h3 class="ion-text-capitalize">
-            <ion-badge color="primary" >{{t.owner.username}}</ion-badge>&nbsp;
-            <ion-badge color="success" >{{t.status}}</ion-badge>&nbsp;
+            <ion-badge color="primary">{{t.owner.username}}</ion-badge>&nbsp;
+            <ion-badge color="success">{{t.status}}</ion-badge>&nbsp;
             <ion-badge color="danger"><small>{{calculateDif(t)}}</small></ion-badge>
           </h3>
         </ion-label>
       </ion-item>
-      <ion-card-content class="contentstyle">
-        <p class="pstyle">{{t.description}}</p>
-      </ion-card-content>
-      <ion-progress-bar value="{{t.progress}}" *ngIf="t.priority=='red'" color="danger"></ion-progress-bar>
-      <ion-progress-bar value="{{t.progress}}" *ngIf="t.priority=='green'" color="success"></ion-progress-bar>
-      <ion-progress-bar value="{{t.progress}}" *ngIf="t.priority=='orange'" color="warning"></ion-progress-bar>
+      <ion-progress-bar value="{{t.progress}}"  color="primary"></ion-progress-bar>
     </ion-card>
   </ion-list>
 </ion-content>

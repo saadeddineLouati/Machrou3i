@@ -14,6 +14,7 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { AutosizeModule } from 'ngx-autosize'
+import { PopoverComponent } from './popover/popover.component';
 
 
 export function jwtOptionsFactory(storage) {
@@ -26,8 +27,8 @@ export function jwtOptionsFactory(storage) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, PopoverComponent],
+  entryComponents: [PopoverComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

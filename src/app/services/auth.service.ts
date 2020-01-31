@@ -100,6 +100,19 @@ export class AuthService {
     )
   }
 
+  getdevelopers() {
+    return this.http.get(`${this.url}/users/developers`).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(e);
+      })
+    )
+  }
+
   getConversations() {
     return this.http.get(`${this.url}/conversations`).pipe(
       catchError(e => {

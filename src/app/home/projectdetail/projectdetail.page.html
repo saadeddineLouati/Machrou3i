@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref=""></ion-back-button>
+    </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="presentActionSheet()">
         <ion-icon name="more"></ion-icon>
@@ -35,10 +38,10 @@
               {{ t.title }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content class="ion-text-center">
-            <ion-badge color="warning" slot="end" (click)="onUpdateCard(project)">
+            <ion-badge color="warning" slot="end" (click)="onUpdateCard(t)">
               <ion-icon name="create"></ion-icon>
             </ion-badge>
-            <ion-badge color="danger" slot="end" (click)="onDeleteCard(project)">
+            <ion-badge color="danger" slot="end" (click)="onDeleteCard(t)">
               <ion-icon name="close"></ion-icon>
             </ion-badge>
           </ion-card-content>

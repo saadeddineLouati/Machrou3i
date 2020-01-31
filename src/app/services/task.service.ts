@@ -31,6 +31,46 @@ export class TaskService {
     )
   }
 
+  getTaskByCard(credentials) {
+    return this.http.post(`${this.url}/tasks/gettaskbycard`, credentials).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+        }
+        throw new Error(e);
+      })
+    )
+  }
+
+  deleteTask(credentials) {
+    console.log(credentials);
+    return this.http.post(`${this.url}/tasks/removetask`, credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
+  addTask(credentials, card) {
+    console.log(credentials)
+    console.log(card)
+    return this.http.post(`${this.url}/tasks/addtask`,{
+      title: credentials.title,
+      description: credentials.description,
+      priority: credentials.priority,
+      deadline: credentials.deadline,
+      owner: credentials.owner,
+      taskgroup: card._id
+    }).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Location} from '@angular/common';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, PopoverController, AlertController } from '@ionic/angular';
 import { TaskService } from 'src/app/services/task.service';
+import { PopoverComponent } from 'src/app/popover/popover.component';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-card-detail',
@@ -14,10 +17,20 @@ export class CardDetailPage implements OnInit {
   card;
   tasks;
   public press: number = 0;
-  constructor(public actionSheetController: ActionSheetController,private _location: Location, private router: Router,  private route:ActivatedRoute, private task:TaskService) {
-    this.task.getTasks().subscribe(res => {
-      this.tasks = res;
-    });
+  addTask: FormGroup
+  developers;
+  constructor(
+    private formBuilder: FormBuilder,
+    public popoverController:PopoverController,
+    public actionSheetController: ActionSheetController,
+    private _location: Location,
+    private router: Router,
+    private route:ActivatedRoute,
+    private task:TaskService,
+    private authService: AuthService,
+    private alertController:AlertController
+  ) {
+
    }
 
    calculateDif(event) {
@@ -34,9 +47,30 @@ export class CardDetailPage implements OnInit {
     this.press++
   }
 
+  async newTask(event){
+    console.log("saad")
+    await this.task.addTask(this.addTask.value, this.card).subscribe();
+    this.ngOnInit();
+    this.showAlert("New Task has been added.", 'SUCCESS');
+
+  }
+
   ngOnInit() {
+    this.addTask = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      priority: ['', [Validators.required]],
+      deadline: ['', [Validators.required]],
+      owner: ['', [Validators.required]],
+    });
     this.route.params.forEach((params: Params) => {
   		this.card = params;
+    });
+    this.task.getTaskByCard(this.card).subscribe(res => {
+      this.tasks = res;
+    });
+    this.authService.getdevelopers().subscribe(res => {
+      this.developers = res;
     });
   }
 
@@ -44,14 +78,15 @@ export class CardDetailPage implements OnInit {
     this._location.back();
   }
 
-  async presentActionSheet() {
+
+  async presentActionSheet(t) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Project options',
       buttons: [ {
-        text: 'Add New Task',
-        icon: 'add-circle',
+        text: 'Details',
+        icon: 'information-circle',
         handler: () => {
-          console.log('Add New Task');
+          this.showAlert(t.description, t.title);
         }
       },
       {
@@ -66,8 +101,11 @@ export class CardDetailPage implements OnInit {
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-          console.log('Delete clicked');
-        }
+          this.task.deleteTask(t).subscribe();
+          this.ngOnInit();
+          this.showAlert("Successfully deleted", t.title);
+
+      }
       }, {
         text: 'Cancel',
         icon: 'close',
@@ -80,5 +118,32 @@ export class CardDetailPage implements OnInit {
     });
     await actionSheet.present();
   }
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
+  }
+
+  showAlert(msg, header) {
+    let alert = this.alertController.create({
+      message: msg,
+      header: header,
+      buttons: ['OK']
+    });
+    alert.then(alert => alert.present());
+  }
+
+  async presentAlert(x,y) {
+    const alert = await this.alertController.create({
+      header: x,
+      message: y
+    });
+
+    await alert.present();
+  }
+  
 
 }

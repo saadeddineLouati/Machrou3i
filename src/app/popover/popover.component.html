@@ -1,0 +1,11 @@
+<ion-list>
+  <ion-item *ngFor="let u of users">
+    <ion-avatar slot="start">
+      <img src="../../assets/{{u.picture}}">
+    </ion-avatar>
+    <ion-label>
+      <h3>{{u.username}}</h3>
+      <p> {{u.email}} </p>
+    </ion-label>
+  </ion-item>
+</ion-list>

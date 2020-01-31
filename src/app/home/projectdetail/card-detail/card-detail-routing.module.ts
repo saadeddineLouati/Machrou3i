@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: CardDetailPage
+  },
+  {
+    path: 'addtask',
+    loadChildren: () => import('./add-task/addtask/addtask.module').then( m => m.AddtaskPageModule)
   }
 ];
 

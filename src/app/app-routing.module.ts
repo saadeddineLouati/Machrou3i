@@ -60,7 +60,11 @@ const routes: Routes = [
   {
     path: 'conversations',
     loadChildren: () => import('./conversations/conversations.module').then( m => m.ConversationsPageModule)
+  },  {
+    path: 'contact',
+    loadChildren: () => import('./contact/contact.module').then( m => m.ContactPageModule)
   }
+
 
 ];
 @NgModule({

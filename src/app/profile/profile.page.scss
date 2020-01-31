@@ -47,7 +47,10 @@ ion-chip {
 }
 
 .card-body {
-    background-color: #ffffff;
+    --background: none;
+    background-image: url(../../assets/addCard.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
     overflow: hidden;
 
     .user-meta {

@@ -30,6 +30,34 @@ export class TaskgroupService {
     )
   }
 
+  
+  getTaskgroupById(credentials) {
+    return this.http.post(`${this.url}/tasksgroups/getTaskGroupById`, credentials).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(e);
+      })
+    )
+  }
+
+  getTaskGroupByProject(credentials) {
+    console.log(credentials);
+    return this.http.post(`${this.url}/tasksgroups/getTaskGroupByProject`, credentials).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(e);
+      })
+    )
+  }
+
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,
@@ -48,6 +76,15 @@ export class TaskgroupService {
   deleteTaskGroup(credentials) {
     console.log(credentials);
     return this.http.post(`${this.url}/tasksgroups/removetaskgroup`, credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
+  addTaskGroup(credentials) {
+    return this.http.post(`${this.url}/tasksgroups/addtasksgroup`, credentials).pipe(
       catchError(e => {
         this.showAlert(e.error.msg);
         throw new Error(JSON.stringify(e));

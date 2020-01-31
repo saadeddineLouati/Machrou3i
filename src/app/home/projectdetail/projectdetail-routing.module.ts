@@ -9,12 +9,16 @@ const routes: Routes = [
     component: ProjectdetailPage
   },
   {
-    path: 'add-card/:id',
+    path: 'add-card',
     loadChildren: () => import('./add-card/add-card.module').then( m => m.AddCardPageModule)
   },
   {
     path: 'card-detail',
     loadChildren: () => import('./card-detail/card-detail.module').then( m => m.CardDetailPageModule)
+  },
+  {
+    path: 'updatecard',
+    loadChildren: () => import('./updatecard/updatecard.module').then( m => m.UpdatecardPageModule)
   }
 ];
 

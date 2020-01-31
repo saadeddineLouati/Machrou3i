@@ -12,6 +12,7 @@ import { ActionSheetController, AlertController } from '@ionic/angular';
 export class ProjectdetailPage implements OnInit {
   project;
   taskgroups;
+  reload="false"
   constructor(private alertController: AlertController, private taskgroupService:TaskgroupService, public actionSheetController: ActionSheetController, private authService: AuthService,private router: Router,  private route:ActivatedRoute, private taskgroup: TaskgroupService) {
     
    }
@@ -22,10 +23,11 @@ export class ProjectdetailPage implements OnInit {
 
   getProject(){
     this.route.params.forEach((params: Params) => {
-  		this.project = params;
+      this.project = params;
     });
     
-    this.taskgroup.getTaskgroups().subscribe(res => {
+    this.taskgroup.getTaskGroupByProject(this.project).subscribe(res => {
+      console.log(this.project);
       this.taskgroups = res;
     });
   }
@@ -37,7 +39,7 @@ export class ProjectdetailPage implements OnInit {
         text: 'Add New Card',
         icon: 'add-circle',
         handler: () => {
-          console.log('Add New Card');
+          this.addCard();
         }
       },
       {
@@ -102,8 +104,8 @@ export class ProjectdetailPage implements OnInit {
     this.router.navigate(['menu/projectdetail/card-detail', t])
   }
 
-  addCard(t){
-    this.router.navigate(['menu/projectdetail/addcard/'+this.project._id])
+  addCard(){
+    this.router.navigate(['menu/projectdetail/add-card',this.project])
   }
 
   
