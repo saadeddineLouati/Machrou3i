@@ -50,7 +50,38 @@ export class AuthService {
       })
     );
   }
+
+  newDeal(credentials) {
+    return this.http.post(`${this.url}/deals/newdeal`, credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
  
+  sendnotif(credentials) {
+    return this.http.post(`${this.url}/deals/sendnotif`, credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
+  getNotif() {
+    return this.http.get(`${this.url}/deals/notifications`).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
   login(credentials) {
     return this.http.post(`${this.url}/users/login`, credentials)
       .pipe(
@@ -100,8 +131,34 @@ export class AuthService {
     )
   }
 
+  getDeals() {
+    return this.http.get(`${this.url}/deals`).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(e);
+      })
+    )
+  }
+
   getdevelopers() {
     return this.http.get(`${this.url}/users/developers`).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(e);
+      })
+    )
+  }
+
+  getUsers() {
+    return this.http.get(`${this.url}/users`).pipe(
       catchError(e => {
         let status = e.status;
         if (status === 401) {

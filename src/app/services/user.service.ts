@@ -62,6 +62,8 @@ export class UserService {
     return this.authenticationState.value;
   }
  
+
+
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,
@@ -80,6 +82,30 @@ export class UserService {
 
   getCurrentUser() {
     return this.http.get(`${this.url}/users/special`).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(JSON.stringify(e));
+      })
+    )
+  }
+
+  sendMsg(credentials) {
+    return this.http.post(`${this.url}/messages/newMessage`, credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
+
+  
+  getMessages(credentials) {
+    return this.http.post(`${this.url}/messages/chatwith`, credentials).pipe(
       catchError(e => {
         let status = e.status;
         if (status === 401) {

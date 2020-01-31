@@ -1,47 +1,88 @@
 <ion-app>
-  <ion-header translucent>
-    <ion-searchbar></ion-searchbar>
-
+  <ion-header translucent no-border >
+    <ion-searchbar></ion-searchbar >
+    <ion-toolbar color="dark">
+      <ion-title>Deals</ion-title>
+    </ion-toolbar>
   </ion-header>
   <ion-content fullscreen>
-    <ion-list>
-      <ion-item>Amsterdam</ion-item>
-      <ion-item>Bogota</ion-item>
-      <ion-item>Buenos Aires</ion-item>
-      <ion-item>Cairo</ion-item>
-      <ion-item>Dhaka</ion-item>
-      <ion-item>Edinburgh</ion-item>
-      <ion-item>Geneva</ion-item>
-      <ion-item>Genoa</ion-item>
-      <ion-item>Glasgow</ion-item>
-      <ion-item>Hanoi</ion-item>
-      <ion-item>Hong Kong</ion-item>
-      <ion-item>Islamabad</ion-item>
-      <ion-item>Istanbul</ion-item>
-      <ion-item>Jakarta</ion-item>
-      <ion-item>Kiel</ion-item>
-      <ion-item>Kyoto</ion-item>
-      <ion-item>Le Havre</ion-item>
-      <ion-item>Lebanon</ion-item>
-      <ion-item>Lhasa</ion-item>
-      <ion-item>Lima</ion-item>
-      <ion-item>London</ion-item>
-      <ion-item>Los Angeles</ion-item>
-      <ion-item>Madrid</ion-item>
-      <ion-item>Manila</ion-item>
-      <ion-item>New York</ion-item>
-      <ion-item>Olympia</ion-item>
-      <ion-item>Oslo</ion-item>
-      <ion-item>Panama City</ion-item>
-      <ion-item>Peking</ion-item>
-      <ion-item>Philadelphia</ion-item>
-      <ion-item>San Francisco</ion-item>
-      <ion-item>Seoul</ion-item>
-      <ion-item>Taipeh</ion-item>
-      <ion-item>Tel Aviv</ion-item>
-      <ion-item>Tokio</ion-item>
-      <ion-item>Uelzen</ion-item>
-      <ion-item>Washington</ion-item>
-    </ion-list>
-  </ion-content>
+    <ion-slides class="new">
+
+      <ion-slide>
+        <ion-item *ngFor="let d of deals" color="light">
+          <ion-avatar slot="start">
+            <img src="../../assets/{{d.owner.picture}}">
+          </ion-avatar>
+          <ion-label>
+            <h2><b><ion-icon name="person"></ion-icon> {{d.owner.username}}</b></h2>
+            <h3><ion-icon name="cog"></ion-icon> {{d.owner.company}}</h3>
+            <h3><ion-icon name="filing"></ion-icon> {{d.title}}</h3>
+          </ion-label>
+          <ion-label>
+            &nbsp;
+          </ion-label>
+          <ion-label>
+            <ion-button shape="round" fill="solid" (click)="openDeal(d)">
+              <ion-icon name="information-circle"></ion-icon>
+            </ion-button>
+          </ion-label>
+        </ion-item>
+      </ion-slide>
+
+      <ion-slide>
+        <h2>
+          <ion-icon name="add-circle"></ion-icon>
+          <b>Post New deal</b>
+        </h2>
+        <form [formGroup]="newDealForm" (ngSubmit)="newDeal()">
+ 
+          <ion-item color="transparent">
+            <ion-label position="floating">Title</ion-label>
+            <ion-input type="email" formControlName="title"></ion-input>
+          </ion-item>
+       
+          <ion-item color="transparent">
+            <ion-label position="floating">Description</ion-label>
+            <ion-input type="text" formControlName="description"></ion-input>
+          </ion-item>
+
+          <ion-item color="transparent">
+            <ion-label position="floating">Size</ion-label>
+            <ion-select formControlName="size">
+              <ion-select-option value="small">Big</ion-select-option>
+              <ion-select-option value="medium">Medium</ion-select-option>
+              <ion-select-option value="small" selected>Small</ion-select-option>
+            </ion-select>
+          </ion-item >
+          
+          <ion-item color="transparent">
+            <ion-label position="floating">Kind</ion-label>
+            <ion-select formControlName="kind">
+              <ion-select-option value="female">Female</ion-select-option>
+              <ion-select-option value="male" selected>Male</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item color="transparent">
+            <ion-label position="floating">Starting Date</ion-label>
+            <ion-input type="date" formControlName="start"></ion-input>
+          </ion-item>
+
+
+          <ion-item color="transparent">
+            <ion-label position="floating">Deadline</ion-label>
+            <ion-input type="date" formControlName="deadline"></ion-input>
+          </ion-item>
+          <!-- <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button> -->
+          <!-- <ion-button expand="full" type="button" href="/projects" >Register</ion-button> -->
+          <ion-button shape="round" fill="solid" type="submit" [disabled]="!newDealForm.valid">
+            <ion-icon name="add-circle"></ion-icon>
+             Add
+          </ion-button>
+        </form>
+        <p>&nbsp;</p>
+      </ion-slide>
+
+    </ion-slides>
+    </ion-content>
 </ion-app>

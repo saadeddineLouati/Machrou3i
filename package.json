@@ -30,8 +30,12 @@
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
     "firebase": "^7.6.1",
+    "ng-socket-io": "^0.2.4",
     "ngx-autosize": "^1.7.2",
+    "ngx-socket-io": "^3.0.1",
     "rxjs": "~6.5.1",
+    "rxjs-compat": "^6.5.4",
+    "rxjs-observable": "0.0.7",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },

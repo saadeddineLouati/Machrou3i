@@ -1,9 +1,37 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>Notifications</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list color="transparent">
+    <ion-list-header>
+      My personnal notifications list
+    </ion-list-header>
 
+    <ion-item *ngFor="let n of notifs" (click)="openNotif(n)">
+      <ion-avatar slot="start">
+        <img src="../../assets/{{n.sender.picture}}">
+      </ion-avatar>
+      <ion-label>
+        <h2> {{n.sender.username}} </h2>
+        <h3> {{n.title}} </h3>
+        <p> {{n.description}} </p>
+        <ion-grid>
+          <ion-row>
+            <ion-col size=4>
+              &nbsp;
+            </ion-col>
+            <ion-col size=4>
+              &nbsp;
+            </ion-col>
+            <ion-col size=4>
+              <small>{{n.createdAt | date: 'short'}}</small>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

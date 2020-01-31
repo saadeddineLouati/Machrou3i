@@ -1,0 +1,17 @@
+ion-content{
+    --background: none;
+    background-image: url(../../assets/notifs.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+
+}
+
+ion-list{
+    --background: none;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    color: white;
+}
+
+ion-list-header{
+    color: white;
+}

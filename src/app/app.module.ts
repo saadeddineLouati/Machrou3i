@@ -16,6 +16,9 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AutosizeModule } from 'ngx-autosize'
 import { PopoverComponent } from './popover/popover.component';
 
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
+
 
 export function jwtOptionsFactory(storage) {
   return {
@@ -31,6 +34,7 @@ export function jwtOptionsFactory(storage) {
   entryComponents: [PopoverComponent],
   imports: [
     BrowserModule,
+    SocketIoModule.forRoot(config),
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,

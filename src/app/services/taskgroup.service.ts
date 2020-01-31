@@ -92,4 +92,14 @@ export class TaskgroupService {
     );
   }
 
+  editTaskGroup(credentials) {
+    console.log(credentials);
+    return this.http.post(`${this.url}/tasksgroups/updatetaskgroup`, credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
 }

@@ -96,8 +96,8 @@ export class ProjectdetailPage implements OnInit {
     await alert.present();
   }
 
-  onUpdateCard(){
-    console.log('update');
+  onUpdateCard(t){
+    this.router.navigate(['menu/projectdetail/updatecard', t])
   }
 
   carDetails(t){

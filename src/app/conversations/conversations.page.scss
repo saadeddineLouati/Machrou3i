@@ -1,0 +1,25 @@
+:root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+  }
+
+  .swiper-slide {
+    display: contents;
+  }
+
+  ion-slide > h2 {
+    margin-top: 2.8rem;
+  }
+
+  ion-slide > img {
+    max-height: 50%;
+    max-width: 10%;
+    margin: 0 0;
+  }
+
+  ion-content{
+    --background: none;
+    background-image: url(../../assets/notifs.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+}

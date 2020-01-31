@@ -1,9 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>updatecard</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="/"></ion-back-button>
+  
+    </ion-buttons>
+    <ion-title> Update -{{card.title}}-</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form (ngSubmit)="editTaskGroup($event)" [formGroup]="editCardForm">
+ 
+    <ion-item color="transparent">
+      <ion-label position="floating">Title</ion-label>
+      <ion-input type="text" formControlName="title"></ion-input>
+    </ion-item>
+ 
+    <ion-item color="transparent">
+      <ion-label position="floating">Description</ion-label>
+      <ion-input type="text" formControlName="description"></ion-input>
+    </ion-item>
 
+    <ion-item color="transparent">
+      <ion-label position="floating">Priority</ion-label>
+      <ion-select formControlName="priority">
+        <ion-select-option value="red">Red (Height)</ion-select-option>
+        <ion-select-option value="orange">Orange (Medium)</ion-select-option>
+        <ion-select-option value="green" selected>Green (Low)</ion-select-option>
+      </ion-select>
+    </ion-item >
+
+    <ion-item color="transparent">
+      <ion-label position="floating">Deadline</ion-label>
+      <ion-input type="date" autofocus="true" formControlName="deadline" value="{{card.deadline}}"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" shape="round" fill="solid" type="submit" size="default" [disabled]="!editCardForm.valid">Create</ion-button>
+
+ 
+  </form>
 </ion-content>

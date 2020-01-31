@@ -11,10 +11,14 @@ import { Router } from '@angular/router';
 })
 export class ConversationsPage implements OnInit {
   conversations
-
+  users;
   constructor(private authService: AuthService, private storage: Storage, private toastController: ToastController, private router: Router) { 
     this.authService.getConversations().subscribe(res => {
       this.conversations = res;
+    });
+
+    this.authService.getUsers().subscribe(res => {
+      this.users = res;
     });
   }
 
@@ -23,6 +27,10 @@ export class ConversationsPage implements OnInit {
 
   newChat(){
     this.router.navigate(['chat']);
+  }
+
+  openChat(c){
+    this.router.navigate(['chat', c]);
   }
 
 }

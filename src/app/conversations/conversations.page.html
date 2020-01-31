@@ -1,16 +1,22 @@
 <ion-app>
   <ion-header translucent>
-    <ion-toolbar>
+    <ion-toolbar color="tertiary">
       <ion-title>Conversations</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content fullscreen>
-    <ion-list>
-      <ion-list-header>
+    <ion-list no-padding class="slider-zoom" style="background-color: rgba(0, 0, 0, 0.3);">
+      <ion-slides>
+        <ion-slide style="width: 10px;" *ngFor="let u of users">
+          <ion-avatar slot="start">
+            <img src="../../assets/{{u.picture}}" style="border: 2px solid purple;" (click)="openChat(u)">
+          </ion-avatar>
+        </ion-slide>
+      </ion-slides> 
+    </ion-list>
+    <ion-list color="transparent" style="background-color: transparent;">
         <ion-button color="primary" (click)="newChat()"><ion-icon name="create"></ion-icon> New</ion-button>
-      </ion-list-header>
-
       <ion-item *ngFor="let c of conversations" color="light">
         <ion-avatar slot="start">
           <img src="https://positiveattitudee.com/wp-content/uploads/2019/05/mr.-bean.jpg">

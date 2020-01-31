@@ -1,19 +1,24 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>New chat</ion-title>
+      <ion-item color="tertiary">
+        <ion-avatar slot="start">
+          <img src="../../assets/{{reciever.picture}}" style="border: 2px solid purple;">
+        </ion-avatar>
+        <p> {{reciever.username}} </p>
+      </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row *ngFor = "let msg of messages">
-      <ion-col size-9 *ngIf = "currentuser !== msg.user" class="message other-message">
-        <b> {{msg.user}} </b>
+    <ion-row *ngFor="let msg of messages">
+      <ion-col size-9 *ngIf="currentuser._id !== msg.sender._id" class="message other-message">
+        <b> {{msg.reciever.username}} </b>
         <br>
-        <span> {{msg.msg}} </span>
+        <span> {{msg.message}} </span>
         <br>
         <div class="time" text-right>
           <br>
@@ -21,10 +26,10 @@
         </div>
       </ion-col>
 
-      <ion-col offset="3" size-9 *ngIf = "currentuser === msg.user" class="message my-message">
-        <b> {{msg.user}} </b>
+      <ion-col offset="3" size-9 *ngIf="currentuser._id === msg.sender._id" class="message my-message">
+        <b> {{msg.sender.username}} </b>
         <br>
-        <span> {{msg.msg}} </span>
+        <span> {{msg.message}} </span>
         <br>
         <div class="time" text-right>
           <br>
@@ -41,8 +46,9 @@
       <ion-col size="10">
         <textarea autosize maxRows="4" [(ngModel)]="newMsg" class="message-input"></textarea>
       </ion-col>
-      <ion-col size="2"> 
-        <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''" class="msg-btn" (click)="sendMessage()">
+      <ion-col size="2">
+        <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''" class="msg-btn"
+          (click)="sendMessage()">
           <ion-icon name="ios-send" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-col>
