@@ -71,6 +71,16 @@ export class TaskService {
     );
   }
 
+
+  updateProgress(credentials) {
+    return this.http.post(`${this.url}/tasks/updatetaskstatus`,credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,

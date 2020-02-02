@@ -17,11 +17,48 @@ export class HomePage implements OnInit {
   projects;
   getTaskgroups;
   deleted;
+  cu={};
   constructor(private route: ActivatedRoute, private changeRef: ChangeDetectorRef, private authService: AuthService, private storage: Storage, private toastController: ToastController, private router: Router, private taskgroup: TaskgroupService, private alertController: AlertController, private projectsService: ProjectsService) {
+
   }
 
-  ngOnInit() {
+ async ngOnInit() {
+  this.authService.getSpecialData().subscribe(res=>{
+    this.cu=res;
+    this.getCurrentUser();
+    if(this.cu.position=="developer"){
+      this.getDevProjects();
+
+    }else{
+      this.getProjects();
+
+    }
+  })
   }
+
+  async getCurrentUser(){
+    await this.authService.getSpecialData().subscribe(res=>{
+      this.cu=res;
+      console.log(this.cu);
+    })
+  }
+
+
+  
+    getDevProjects(){
+      this.projectsService.getprojectsbytask(this.cu).subscribe(res=>{
+        this.projects=res;
+        console.log("pppp");
+        console.log(this.projects);
+        let x=[];
+        this.projects.forEach(function (value) {
+          x.push(value.taskgroup.project);
+        })
+  
+        this.projects=x;
+      })
+    }
+
 
   addNewProject() {
     this.router.navigate(['home/addproject']);
@@ -30,7 +67,7 @@ export class HomePage implements OnInit {
     this.router.navigate(['menu/projectdetail', p]);
   }
 
-  getProjects() {
+ async getProjects() {
 
     // this.route.params.forEach((params: Params) => {
     // 	this.projects = params;
@@ -39,16 +76,12 @@ export class HomePage implements OnInit {
 
     this.authService.getProjects().subscribe(res => {
       this.projects = res;
+      
     });
   }
-
-  ionViewWillEnter() {
-    this.getProjects();
-  }
-
   doRefresh(event) {
     console.log('Begin async operation');
-
+    this.ngOnInit();
     setTimeout(() => {
       console.log('Async operation has ended');
       event.target.complete();

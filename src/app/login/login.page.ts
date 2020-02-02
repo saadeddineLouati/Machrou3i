@@ -33,10 +33,13 @@ export class LoginPage implements OnInit {
   }
  
   onSubmit() {
+    
     this.authService.login(this.credentialsForm.value).subscribe();
   }
  
   register() {
+    console.log(this.credentialsForm2.value)
+
     this.authService.register(this.credentialsForm2.value).subscribe(async res => {
       await this.authService.login({email: this.credentialsForm2.value.email, password: this.credentialsForm2.value.password}).subscribe();
 

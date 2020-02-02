@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button  defaultHref=""></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="cu.position=='cto'">
       <ion-button (click)="presentActionSheet()">
         <ion-icon name="more"></ion-icon>
       </ion-button>
@@ -13,13 +13,16 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card color="primary">
     <img src="../../../assets/bridge.png" />
     <ion-card-header>
       <ion-card-subtitle><ion-icon name="alarm"></ion-icon>Since {{project.createdAt |date: 'short' }}</ion-card-subtitle>
       <ion-card-title>{{project.title}}</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content style="padding: 3%;">
       {{project.description}}
     </ion-card-content>
   </ion-card>
@@ -37,7 +40,7 @@
             <ion-card-subtitle class="ion-text-center" style="margin: 0; display: block; overflow: scroll; -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; font-size: inherit; white-space: nowrap;">
               {{ t.title }}</ion-card-subtitle>
           </ion-card-header>
-          <ion-card-content class="ion-text-center">
+          <ion-card-content class="ion-text-center" *ngIf="cu.position=='cto'">
             <ion-badge color="warning" slot="end" (click)="onUpdateCard(t)">
               <ion-icon name="create"></ion-icon>
             </ion-badge>
@@ -47,7 +50,7 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col size="6">
+      <ion-col size="6" *ngIf="cu.position=='cto'">
         <ion-card color="secondary" (click)="addCard(t)">
           <img src="../../../assets/plus.png"  />
           <ion-card-header>

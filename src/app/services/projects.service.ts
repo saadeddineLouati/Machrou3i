@@ -48,6 +48,18 @@ export class ProjectsService {
     )
   }
 
+  getprojectsbytask(credentials) {
+    return this.http.get(`${this.url}/tasks/getprojectsbytask`, credentials).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+        }
+        throw new Error(e);
+      })
+    )
+  }
+
   getProjectByProjectId(credentials) {
     return this.http.post(`${this.url}/projects/getprojectbyprojectid`, credentials).pipe(
       catchError(e => {

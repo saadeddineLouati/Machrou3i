@@ -85,7 +85,8 @@
             <ion-label position="floating">Gender</ion-label>
             <ion-select formControlName="gender">
               <ion-select-option value="female">Female</ion-select-option>
-              <ion-select-option value="male" selected>Male</ion-select-option>
+              <ion-select-option value="male" >Male</ion-select-option>
+              <ion-select-option value="none" selected>Male</ion-select-option>
             </ion-select>
           </ion-item>
 
@@ -111,7 +112,7 @@
           </ion-item>
           <!-- <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button> -->
           <!-- <ion-button expand="full" type="button" href="/projects" >Register</ion-button> -->
-          <ion-button shape="round" fill="outline" type="submit" [disabled]="!credentialsForm.valid">Register</ion-button>
+          <ion-button shape="round" fill="outline" type="submit" [disabled]="!credentialsForm2.valid">Register</ion-button>
 
        
         </form>

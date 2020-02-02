@@ -5,6 +5,7 @@ import {Socket} from 'ng-socket-io';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -24,7 +25,14 @@ export class ChatPage implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private authService: AuthService
-  ) { }
+  ) { 
+    this.getMessages().subscribe(message => {
+      this.messages.push(message);
+      setTimeout(() => {
+        this.content.scrollToBottom(200); 
+      });
+    });
+  }
  
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
@@ -32,21 +40,43 @@ export class ChatPage implements OnInit {
     });
     this.userService.getMessages({
       "_id":this.reciever._id
-    }).subscribe(res=>{
+    }).subscribe(async res=>{
       this.messages = res
       this.messages = this.stack(this.messages);
-      console.log(this.messages)
+      this.messages.sort((a, b)=>{
+        if(a.createdAt==b.createdAt){
+          return 0;
+        }else{
+          if (a.createdAt>b.createdAt){
+            return 1
+          }else if (a.createdAt<b.createdAt){
+            return -1
+          }
+        }
+      });
+      setTimeout(() => {
+        this.content.scrollToBottom(200*this.messages.length);
+      });
+      this.socket.connect();
+      this.socket.emit('set-nickname', this.currentuser, this.reciever)
     });
 
   this.authService.getSpecialData().subscribe(res=>{
     this.currentuser=res;
     console.log(this.currentuser);
   })
-
-
-
   }
 
+
+  f(array,prop, desc) {
+    array.sort(function(a, b) {
+        if (a[prop] < b[prop])
+            return desc ? 1 : -1;
+        if (a[prop] > b[prop])
+            return desc ? -1 : 1;
+        return 0;
+    })
+  }
 
   stack(d){
     const result = [];
@@ -60,10 +90,14 @@ export class ChatPage implements OnInit {
     return result;
   }
   sendMessage(){
-    this.messages.push({
-      user: this.currentuser,
-      createdAt: new Date().getTime(),
-      msg: this.newMsg
+    // this.messages.push({
+    //   user: this.currentuser,
+    //   createdAt: new Date().getTime(),
+    //   msg: this.newMsg
+    // });
+    this.socket.emit('add-message', {
+      message:this.newMsg,
+      reciever:this.reciever._id
     });
 
     this.userService.sendMsg({
@@ -75,8 +109,17 @@ export class ChatPage implements OnInit {
     
     this.newMsg='';
     setTimeout(() => {
-      this.content.scrollToBottom(200); 
+      this.content.scrollToBottom(300); 
     });
+  }
+
+  getMessages() {
+    let observable = new Observable(observer => {
+      this.socket.on('message', (data) => {
+        observer.next(data);
+      });
+    })
+    return observable;
   }
 
   joinChat(){

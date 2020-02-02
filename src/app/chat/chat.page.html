@@ -16,7 +16,7 @@
   <ion-grid>
     <ion-row *ngFor="let msg of messages">
       <ion-col size-9 *ngIf="currentuser._id !== msg.sender._id" class="message other-message">
-        <b> {{msg.reciever.username}} </b>
+        <b> {{msg.sender.username}} </b>
         <br>
         <span> {{msg.message}} </span>
         <br>

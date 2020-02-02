@@ -13,8 +13,11 @@ export class ProjectdetailPage implements OnInit {
   project;
   taskgroups;
   reload="false"
+  cu={};
   constructor(private alertController: AlertController, private taskgroupService:TaskgroupService, public actionSheetController: ActionSheetController, private authService: AuthService,private router: Router,  private route:ActivatedRoute, private taskgroup: TaskgroupService) {
-    
+    this.authService.getSpecialData().subscribe(res=>{
+      this.cu=res;
+    })
    }
 
   ngOnInit() {
@@ -108,5 +111,13 @@ export class ProjectdetailPage implements OnInit {
     this.router.navigate(['menu/projectdetail/add-card',this.project])
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.ngOnInit();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
   
 }

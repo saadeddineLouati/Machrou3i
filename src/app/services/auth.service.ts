@@ -69,6 +69,19 @@ export class AuthService {
     );
   }
 
+  getCardFounder(t){
+    return this.http.post(`${this.url}/tasks/taskpop`, t).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
+
   getNotif() {
     return this.http.get(`${this.url}/deals/notifications`).pipe(
       catchError(e => {
@@ -145,7 +158,7 @@ export class AuthService {
   }
 
   getdevelopers() {
-    return this.http.get(`${this.url}/users/developers`).pipe(
+    return this.http.get(`${this.url}/users`).pipe(
       catchError(e => {
         let status = e.status;
         if (status === 401) {

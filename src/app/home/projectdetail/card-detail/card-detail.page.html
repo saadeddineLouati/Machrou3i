@@ -15,7 +15,7 @@
       Tasks List
     </ion-list-header>
 
-    <form (ngSubmit)="newTask($event)" [formGroup]="addTask">
+    <form (ngSubmit)="newTask($event)" [formGroup]="addTask" *ngIf="cu.position=='cto'">
 
       <ion-card>
         <ion-header>
@@ -27,11 +27,12 @@
           </ion-toolbar>
         </ion-header>
         <ion-item color="light" no-padding>
-          <ion-select placeholder="Developer" formControlName="owner" *ngFor="let d of developers">
-            <ion-label>Developer</ion-label>
-            <ion-select-option value="{{d._id}}">
-              {{d.username}}
-            </ion-select-option>
+          <ion-select placeholder="Developer" formControlName="owner" >
+            <p *ngFor="let d of developers">
+              <ion-select-option value="{{d._id}}">
+                {{d.username}}
+              </ion-select-option>
+            </p>
           </ion-select>
           <ion-select placeholder="Priority" formControlName="priority">
             <ion-label>Priority</ion-label>
@@ -56,8 +57,8 @@
       </ion-card>
     </form>
     <ion-card *ngFor="let t of tasks">
-      <ion-header>
-          <ion-toolbar color="danger" *ngIf="t.priority=='red'">
+      <ion-header *ngIf="cu.position=='cto'">
+          <ion-toolbar color="danger" *ngIf="t.priority=='red'" >
             <ion-buttons slot="end">
           <ion-button (click)="presentActionSheet(t)">
             <ion-icon name="more"></ion-icon>
@@ -89,6 +90,116 @@
       </ion-title>
     </ion-toolbar>
       </ion-header>
+ <!-- <ion-header *ngIf="cu.position=='cto'">
+          <ion-toolbar color="danger" *ngIf="t.priority=='red'" >
+            <ion-buttons slot="end">
+          <ion-button (click)="presentActionSheet(t)">
+            <ion-icon name="more"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>
+          {{t.title}}
+        </ion-title>
+      </ion-toolbar>
+          <ion-toolbar color="success" *ngIf="t.priority=='green'">
+
+            <ion-buttons slot="end">
+            <ion-button (click)="presentActionSheet(t)">
+              <ion-icon name="more"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>
+            {{t.title}}
+          </ion-title>
+        </ion-toolbar>
+        <ion-toolbar color="warning" *ngIf="t.priority=='orange'">
+          <ion-buttons slot="end">
+        <ion-button (click)="presentActionSheet(t)">
+          <ion-icon name="more"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        {{t.title}}
+      </ion-title>
+    </ion-toolbar>
+      </ion-header>
+
+
+ -->
+      <ion-header *ngIf="cu.position=='developer' && t.owner._id!=cu._id">
+        <ion-toolbar color="danger" *ngIf="t.priority=='red'" >
+          <ion-buttons slot="end">
+        <ion-button (click)="presentActionSheet2(t)">
+          <ion-icon name="more"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        {{t.title}}
+      </ion-title>
+    </ion-toolbar>
+        <ion-toolbar color="success" *ngIf="t.priority=='green'">
+
+          <ion-buttons slot="end">
+          <ion-button (click)="presentActionSheet2(t)">
+            <ion-icon name="more"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>
+          {{t.title}}
+        </ion-title>
+      </ion-toolbar>
+      <ion-toolbar color="warning" *ngIf="t.priority=='orange'">
+        <ion-buttons slot="end">
+      <ion-button (click)="presentActionSheet2(t)">
+        <ion-icon name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{t.title}}
+    </ion-title>
+  </ion-toolbar>
+    </ion-header>
+
+
+
+
+
+    <ion-header *ngIf="cu.position=='developer' && t.owner._id==cu._id">
+      <ion-toolbar color="danger" *ngIf="t.priority=='red'" >
+        <ion-buttons slot="end">
+      <ion-button (click)="presentActionSheet3(t)">
+        <ion-icon name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{t.title}}
+    </ion-title>
+  </ion-toolbar>
+      <ion-toolbar color="success" *ngIf="t.priority=='green'">
+
+        <ion-buttons slot="end">
+        <ion-button (click)="presentActionSheet3(t)">
+          <ion-icon name="more"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        {{t.title}}
+      </ion-title>
+    </ion-toolbar>
+    <ion-toolbar color="warning" *ngIf="t.priority=='orange'">
+      <ion-buttons slot="end">
+    <ion-button (click)="presentActionSheet3(t)">
+      <ion-icon name="more"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>
+    {{t.title}}
+  </ion-title>
+</ion-toolbar>
+  </ion-header>
+
+
+
       <ion-item color="light">
         <ion-avatar slot="start" style="margin-right: -10px;" *ngIf="t.owner">
           <img src="../../../../assets/{{t.owner.picture}}" style="border: 2px solid dodgerblue;">

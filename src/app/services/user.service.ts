@@ -116,4 +116,26 @@ export class UserService {
       })
     )
   }
+
+  getMeetings() {
+    return this.http.get(`${this.url}/meetings`).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('You are not authorized for this!');
+          this.logout();
+        }
+        throw new Error(JSON.stringify(e));
+      })
+    )
+  }
+
+  addMeeting(credentials) {
+    return this.http.post(`${this.url}/meetings/newmeeting`, credentials).pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(JSON.stringify(e));
+      })
+    );
+  }
 }

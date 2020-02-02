@@ -26,10 +26,7 @@
                 {{p.title}}
               </ion-card-title>
             </ion-card-header>
-            <ion-card-content class="ion-text-center">
-              <ion-badge color="warning" slot="end" (click)="onUpdateProject(p)">
-                <ion-icon name="create"></ion-icon>
-              </ion-badge>
+            <ion-card-content class="ion-text-center" *ngIf="cu.position=='cto'">
               <ion-badge color="danger" slot="end" (click)="onDeleteProject(p)">
                 <ion-icon name="close"></ion-icon>
               </ion-badge>
@@ -39,10 +36,9 @@
       </ion-row>
     </ion-grid>
   </ion-content>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="cu.position=='cto'">
+    <ion-fab-button color="primary" (click)="addNewProject()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-app>
-
-<ion-fab horizontal="end" vertical="bottom" slot="fixed">
-  <ion-fab-button color="primary" (click)="addNewProject()">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
